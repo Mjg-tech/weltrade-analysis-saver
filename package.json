@@ -1,0 +1,20 @@
+{
+  "name": "weltrade-analysis-saver",
+  "version": "1.0.0",
+  "description": "Save, restore and auto-save your drawings on the Weltrade TradingView chart",
+  "type": "module",
+  "bin": {
+    "weltrade-analysis-saver": "dist/saver.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/saver.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "typescript": "^7.0.2"
+  }
+}

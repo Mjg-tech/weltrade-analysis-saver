@@ -1,0 +1,8 @@
+node_modules/
+dist/
+
+# Your saved analyses stay on your computer
+analyses/
+
+# Never commit a browser profile (it holds your logins)
+*-profile/
