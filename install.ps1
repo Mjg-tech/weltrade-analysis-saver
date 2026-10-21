@@ -25,8 +25,8 @@ function Need-Winget {
     throw "winget isn't available. Install 'App Installer' from the Microsoft Store (or install Git and Node.js $MinNode+ by hand from git-scm.com and nodejs.org), then run this again."
   }
 }
-function Winget($action, $id) {
-  winget $action --id $id -e --silent --accept-package-agreements --accept-source-agreements
+function Invoke-Winget($action, $id) {
+  winget.exe $action --id $id -e --silent --accept-package-agreements --accept-source-agreements
 }
 
 # Git
@@ -35,7 +35,7 @@ if (Has git) {
 } else {
   Write-Host "Git: not found, installing..."
   Need-Winget
-  Winget install Git.Git
+  Invoke-Winget install Git.Git
   Update-SessionPath
   if (-not (Has git)) { throw "Git was installed but isn't visible yet. Close this window, open a new PowerShell and run this script again." }
 }
@@ -48,12 +48,12 @@ if ($major -ge $MinNode) {
   if ($major -eq 0) { Write-Host "Node.js: not found, installing..." } else { Write-Host "Node.js: v$major is too old (need $MinNode+), upgrading..." }
   Need-Winget
   if ($major -eq 0) {
-    Winget install OpenJS.NodeJS
+    Invoke-Winget install OpenJS.NodeJS
   } else {
-    Winget upgrade OpenJS.NodeJS
+    Invoke-Winget upgrade OpenJS.NodeJS
     # an older Node that winget didn't install can't be upgraded: install the current one next to it instead
     Update-SessionPath
-    if ((Node-Major) -lt $MinNode) { Winget install OpenJS.NodeJS }
+    if ((Node-Major) -lt $MinNode) { Invoke-Winget install OpenJS.NodeJS }
   }
   Update-SessionPath
   if ((Node-Major) -lt $MinNode) {
